@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using BiogenomTest.Api.Handlers;
 using BiogenomTest.Application.Extensions;
 using BiogenomTest.Infrastructure.Extensions;
 using Serilog;
@@ -28,6 +29,7 @@ public class Program
             });
             builder.Services.AddProblemDetails();
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
             builder.Services.AddDatabase(configuration);
             builder.Services.AddApplication();
             builder.Services.AddSwaggerGen();
@@ -41,8 +43,8 @@ public class Program
             }
 
             app.UseHttpsRedirection();
+            app.UseExceptionHandler();
             app.MapControllers();
-            // app.UseExceptionHandler();
 
             Log.Information("Application started successfully");
             app.Run();
