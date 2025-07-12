@@ -24,7 +24,7 @@ public class GetDailyIntakesQueryHandler(ApplicationDbContext context)
                 x.Status
             ))
             .ToListAsync(cancellationToken);
-        
+
         return result;
     }
 }
