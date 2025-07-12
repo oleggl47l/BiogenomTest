@@ -10,20 +10,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<SupplementBenefit> SupplementBenefits => Set<SupplementBenefit>();
     public DbSet<SupplementProduct> SupplementProducts => Set<SupplementProduct>();
     public DbSet<Nutrient> Nutrients => Set<Nutrient>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<DailyIntake>()
-            .HasOne(di => di.Nutrient)
-            .WithMany(n => n.DailyIntakes)
-            .HasForeignKey(di => di.NutrientId)
-            .OnDelete(DeleteBehavior.Restrict);
-        
-        modelBuilder.Entity<DailyIntake>()
-            .HasOne(di => di.Projection)
-            .WithOne(ip => ip.DailyIntake)
-            .HasForeignKey<IntakeProjection>(ip => ip.DailyIntakeId)
-            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 }

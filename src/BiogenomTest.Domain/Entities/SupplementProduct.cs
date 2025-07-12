@@ -9,5 +9,6 @@ public class SupplementProduct
     public string Description { get; set; } = null!;
     public string? ImageUrl { get; set; }
 
-    public string NutrientTargeted { get; set; } = null!;
+    public int TargetedNutrientId { get; set; }
+    public Nutrient TargetedNutrient { get; set; } = null!;
 }

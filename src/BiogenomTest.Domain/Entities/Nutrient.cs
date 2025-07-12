@@ -8,6 +8,7 @@ public class Nutrient
     public double? Norm { get; set; }
     public double? NormMin { get; set; }
     public double? NormMax { get; set; }
-    
+
     public ICollection<DailyIntake> DailyIntakes { get; set; } = new List<DailyIntake>();
+    public ICollection<SupplementProduct> SupplementProducts { get; set; } = new List<SupplementProduct>();
 }
