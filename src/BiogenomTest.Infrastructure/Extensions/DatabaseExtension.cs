@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BiogenomTest.Infrastructure.Extensions;
 
-public static class DatabaseExtensions
+public static class DatabaseExtension
 {
     public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {

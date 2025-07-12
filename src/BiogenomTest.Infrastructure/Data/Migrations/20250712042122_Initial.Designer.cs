@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BiogenomTest.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250712011250_Initial")]
+    [Migration("20250712042122_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -46,6 +46,36 @@ namespace BiogenomTest.Infrastructure.Data.Migrations
                     b.HasIndex("NutrientId");
 
                     b.ToTable("DailyIntakes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amount = 7.04,
+                            NutrientId = 1,
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amount = 42.390000000000001,
+                            NutrientId = 2,
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amount = 1547.0699999999999,
+                            NutrientId = 3,
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Amount = 225.59999999999999,
+                            NutrientId = 4,
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("BiogenomTest.Domain.Entities.IntakeProjection", b =>
@@ -71,6 +101,22 @@ namespace BiogenomTest.Infrastructure.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("IntakeProjections");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DailyIntakeId = 1,
+                            FromFood = 0.0,
+                            FromSet = 50.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DailyIntakeId = 2,
+                            FromFood = 40.0,
+                            FromSet = 330.0
+                        });
                 });
 
             modelBuilder.Entity("BiogenomTest.Domain.Entities.Nutrient", b =>
@@ -101,6 +147,37 @@ namespace BiogenomTest.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Nutrients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Vitamin D",
+                            Norm = 15.0,
+                            Unit = "mcg"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Vitamin C (ascorbic acid)",
+                            Norm = 100.0,
+                            Unit = "mg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Water",
+                            NormMax = 1900.0,
+                            NormMin = 1800.0,
+                            Unit = "g"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Protein",
+                            Norm = 102.0,
+                            Unit = "g"
+                        });
                 });
 
             modelBuilder.Entity("BiogenomTest.Domain.Entities.SupplementBenefit", b =>
@@ -118,6 +195,33 @@ namespace BiogenomTest.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SupplementBenefits");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "Eliminate vitamin and mineral deficiency"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Title = "Improve the absorption of nutrients from food"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Title = "Compensate for an unbalanced diet"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Title = "Provide the body with vital elements"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Title = "Increase the functional reserves of the body"
+                        });
                 });
 
             modelBuilder.Entity("BiogenomTest.Domain.Entities.SupplementProduct", b =>
@@ -147,6 +251,32 @@ namespace BiogenomTest.Infrastructure.Data.Migrations
                     b.HasIndex("TargetedNutrientId");
 
                     b.ToTable("SupplementProducts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Advanced formula with vitamin D3 and K2",
+                            ImageUrl = "images/vitamin-d.jpg",
+                            Name = "Vitamin D3 Complex",
+                            TargetedNutrientId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Sustained-release vitamin C with bioflavonoids",
+                            ImageUrl = "images/vitamin-c.jpg",
+                            Name = "Premium Vitamin C",
+                            TargetedNutrientId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Complete plant-based protein blend",
+                            ImageUrl = "images/protein.jpg",
+                            Name = "Protein Matrix",
+                            TargetedNutrientId = 4
+                        });
                 });
 
             modelBuilder.Entity("BiogenomTest.Domain.Entities.DailyIntake", b =>

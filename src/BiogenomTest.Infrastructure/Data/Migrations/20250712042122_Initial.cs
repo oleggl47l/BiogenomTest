@@ -3,6 +3,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace BiogenomTest.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
@@ -103,6 +105,59 @@ namespace BiogenomTest.Infrastructure.Data.Migrations
                         principalTable: "DailyIntakes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Nutrients",
+                columns: new[] { "Id", "Name", "Norm", "NormMax", "NormMin", "Unit" },
+                values: new object[,]
+                {
+                    { 1, "Vitamin D", 15.0, null, null, "mcg" },
+                    { 2, "Vitamin C (ascorbic acid)", 100.0, null, null, "mg" },
+                    { 3, "Water", null, 1900.0, 1800.0, "g" },
+                    { 4, "Protein", 102.0, null, null, "g" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SupplementBenefits",
+                columns: new[] { "Id", "Title" },
+                values: new object[,]
+                {
+                    { 1, "Eliminate vitamin and mineral deficiency" },
+                    { 2, "Improve the absorption of nutrients from food" },
+                    { 3, "Compensate for an unbalanced diet" },
+                    { 4, "Provide the body with vital elements" },
+                    { 5, "Increase the functional reserves of the body" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DailyIntakes",
+                columns: new[] { "Id", "Amount", "NutrientId", "Status" },
+                values: new object[,]
+                {
+                    { 1, 7.04, 1, 0 },
+                    { 2, 42.390000000000001, 2, 0 },
+                    { 3, 1547.0699999999999, 3, 0 },
+                    { 4, 225.59999999999999, 4, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SupplementProducts",
+                columns: new[] { "Id", "Description", "ImageUrl", "Name", "TargetedNutrientId" },
+                values: new object[,]
+                {
+                    { 1, "Advanced formula with vitamin D3 and K2", "images/vitamin-d.jpg", "Vitamin D3 Complex", 1 },
+                    { 2, "Sustained-release vitamin C with bioflavonoids", "images/vitamin-c.jpg", "Premium Vitamin C", 2 },
+                    { 3, "Complete plant-based protein blend", "images/protein.jpg", "Protein Matrix", 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "IntakeProjections",
+                columns: new[] { "Id", "DailyIntakeId", "FromFood", "FromSet" },
+                values: new object[,]
+                {
+                    { 1, 1, 0.0, 50.0 },
+                    { 2, 2, 40.0, 330.0 }
                 });
 
             migrationBuilder.CreateIndex(
