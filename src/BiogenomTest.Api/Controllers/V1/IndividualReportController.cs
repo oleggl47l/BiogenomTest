@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BiogenomTest.Api.Controllers.V1;
 
+[ApiController]
+[Route("api/v1/[controller]")]
+[Produces("application/json")]
 public class IndividualReportController(IMediator mediator) : ControllerBase
 {
     [HttpGet("daily-intake")]
