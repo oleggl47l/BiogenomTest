@@ -1,7 +1,9 @@
 using System.Text.Json.Serialization;
 using BiogenomTest.Api.Handlers;
 using BiogenomTest.Application.Extensions;
+using BiogenomTest.Infrastructure.Data;
 using BiogenomTest.Infrastructure.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace BiogenomTest.Api;
@@ -28,11 +30,12 @@ public class Program
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
             builder.Services.AddProblemDetails();
+            builder.Services.AddSwaggerGen();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
             builder.Services.AddDatabase(configuration);
             builder.Services.AddApplication();
-            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
@@ -40,6 +43,15 @@ public class Program
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                
+                var context = services.GetRequiredService<ApplicationDbContext>();
+                if (context.Database.GetPendingMigrations().Any())
+                    context.Database.Migrate();
             }
 
             app.UseHttpsRedirection();

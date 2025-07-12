@@ -19,12 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\BiogenomTest.Application\BiogenomTest.Application.csproj" />
       <ProjectReference Include="..\BiogenomTest.Infrastructure\BiogenomTest.Infrastructure.csproj" />
     </ItemGroup>
