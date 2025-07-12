@@ -6,16 +6,12 @@ namespace BiogenomTest.Domain.Entities;
 public class DailyIntake
 {
     public int Id { get; set; }
-
-    public string NutrientName { get; set; } = null!;
+    
+    public int NutrientId { get; set; }
+    public Nutrient Nutrient { get; set; } = null!;
+    
     public double Amount { get; set; }
-    public string Unit { get; set; } = null!;
-
-    public double? Norm { get; set; }
-    public double? NormMin { get; set; }
-    public double? NormMax { get; set; }
-
     public IntakeStatus Status { get; set; }
     
-    public IntakeProjection? Projection { get; set; } 
+    public IntakeProjection? Projection { get; set; }
 }

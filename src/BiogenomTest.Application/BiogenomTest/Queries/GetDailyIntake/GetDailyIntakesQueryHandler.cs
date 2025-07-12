@@ -15,12 +15,12 @@ public class GetDailyIntakesQueryHandler(ApplicationDbContext context)
             .Where(x => request.Status == null || x.Status == request.Status)
             .Select(x => new DailyIntakeDto(
                 x.Id,
-                x.NutrientName,
+                x.Nutrient.Name,
                 x.Amount,
-                x.Unit,
-                x.Norm,
-                x.NormMin,
-                x.NormMax,
+                x.Nutrient.Unit,
+                x.Nutrient.Norm,
+                x.Nutrient.NormMin,
+                x.Nutrient.NormMax,
                 x.Status
             ))
             .ToListAsync(cancellationToken);

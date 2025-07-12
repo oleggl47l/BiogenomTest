@@ -18,9 +18,9 @@ public class GetIntakeProjectionQueryHandler(ApplicationDbContext context)
             .Where(di => di.Status == IntakeStatus.Low && di.Projection != null)
             .Select(di => new IntakeProjectionDto(
                 di.Projection!.Id,
-                di.NutrientName,
+                di.Nutrient.Name,
                 di.Amount,
-                di.Unit,
+                di.Nutrient.Unit,
                 di.Projection.FromFood,
                 di.Projection.FromSet
             ))
